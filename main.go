@@ -41,7 +41,7 @@ func replyMessage(replyToken string, message string) error {
 	}
 
 	body, _ := json.Marshal(payload)
-	fmt.Println(string(body))
+	// fmt.Println(string(body))
 
 	req, _ := http.NewRequest("POST", url, bytes.NewBuffer(body))
 	req.Header.Set("Authorization", "Bearer "+accessToken)
@@ -69,16 +69,16 @@ func doPost(c *gin.Context) {
 	}
 
 	if len(data.Events) > 0 && data.Events[0].Source.Type == "group" {
-		fmt.Println("Source", data.Events[0].Source)
+		// fmt.Println("Source", data.Events[0].Source)
 		groupId := data.Events[0].Source.GroupId
 		replyToken := data.Events[0].ReplyToken
 
-		fmt.Println("replyToken", replyToken)
-		fmt.Println("groupId", groupId)
+		// fmt.Println("replyToken", replyToken)
+		// fmt.Println("groupId", groupId)
 
 		message := fmt.Sprintf("This is your Group ID: %s", groupId)
 
-		fmt.Println("message", message)
+		// fmt.Println("message", message)
 
 		if err := replyMessage(replyToken, message); err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
