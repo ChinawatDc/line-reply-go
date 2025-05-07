@@ -41,7 +41,6 @@ func replyMessage(replyToken string, message string) error {
 	}
 
 	body, _ := json.Marshal(payload)
-	fmt.Println(string(body))
 
 	req, _ := http.NewRequest("POST", url, bytes.NewBuffer(body))
 	req.Header.Set("Authorization", "Bearer "+accessToken)
